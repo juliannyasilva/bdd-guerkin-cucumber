@@ -1,0 +1,22 @@
+{
+  "name": "bdd-guerkin-cucumber-cypress",
+  "version": "1.0.0",
+  "description": "Estruturação de um projeto utilizando o cucumber para implementar testes de aceitação com base no BDD utilizando o guerkin como especificação.",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx cypress open"
+  },
+  "keywords": [
+    "bbd",
+    "cubumber",
+    "guerkin",
+    "cypress"
+  ],
+  "author": "juliannyasilva@outlook.com",
+  "license": "ISC",
+  "devDependencies": {
+    "@cucumber/cucumber": "^9.0.1",
+    "cypress": "^12.8.1",
+    "cypress-cucumber-preprocessor": "^4.3.1"
+  }
+}
