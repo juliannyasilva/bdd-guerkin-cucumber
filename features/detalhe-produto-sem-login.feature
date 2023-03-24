@@ -25,10 +25,6 @@ Feature: Detalhe de produto sem login
         When informo a descrição do produto
         And clico no icone de busca
         Then redireciona para a tela de resultados da busca
-    
-    Scenario: Deixar de informar um CNPJ/CPF
-        When não informar um valor no campo CNPJ/CPF
-        Then alerta que o campo é obrigatório
 
     Scenario: Fazer login
         And foco em 'olá, faça seu login'
@@ -115,6 +111,7 @@ Feature: Detalhe de produto sem login
         Then posso ver as avaliações mais relevantes que outros clientes fizeram sobre o produto
         When clico em 'ver mais comentários'
         Then carrega mais itens na lista de avaliações
+        
     Scenario: Avalizar produto
         When clico em 'avaliar produto'
         Then redireciona para a tela de login

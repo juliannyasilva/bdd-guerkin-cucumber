@@ -1,182 +1,75 @@
-Feature: Detalhe de produto sem login
+Feature: Detalhe de produto com login
 
-	Como um cliente final
+	Como um cliente autenticado
 	Desejo acessar a tela de detalhe de um produto na Americanas.com.br
-	Para que possa usufruir dos recursos do sistema.
+	Para que possa comprar um produto
 
 	Background: 
 		Given que esteja na tela de detalhe de produto
-        And não realizei login
-
-	Scenario: Fechar mensagem de cookies
-		When clico no botão 'continuar e fechar'
-		Then o pop-up de cookies é fechado
-
-    Scenario: Visualizar politica de privacidade 
-        When clico em 'Política de Privacidade'
-        Then abre uma nova aba com descrição da politica de privacidade
-    
-    Scenario: Acessar tela inicial
-        When clico na logo da americanas
-        Then redireciona para a tela inicial 'https://www.americanas.com.br/'
-
-    Scenario: Buscar produto
-        And clico no campo de busca 'busque aqui seu produto'
-        When informo a descrição do produto
-        And clico no icone de busca
-        Then redireciona para a tela de resultados da busca
-    
-    Scenario: Deixar de informar um CNPJ/CPF
-        When não informar um valor no campo CNPJ/CPF
-        Then alerta que o campo é obrigatório
-
-    Scenario: Fazer login
-        And foco em 'olá, faça seu login'
-        When clico em 'entrar'
-        Then redireciona para a tela de login
-
-    Scenario: Acessar marketplace
-        When clico no icone de loja no header
-        Then redireciona para a tela de lojas maericadas em todo Brasil
+        And estou com o login efeituado com sucesso
 
     Scenario: Acessar produto salvo
         And foco no icone de coração no header
+        And não salvei um produto
         When clico em 'Acessar meus favoritos'
-        Then redireciona para a tela de login
+        Then redireciona para a tela itens salvos
+        And exibe a mensagem 'Você não possui produtos salvos'
 
     Scenario: Acessar carrinho de compra
-        And foco no icone de cesta no header
-        When lista os produtos adicionado no carrinho
-
-    Scenario: Fazer cadastro
-        And foco em 'cadastre-se'
-        When clico em 'cadastrar'
-        Then redireciona para a tela de cadastro
-
-    Scenario: Traduzir em libras
-        And clico em 'tradutor para Libras'
-        Then Abre o botão flutuante de libras
-        When clico no icone de libras
-        Then exibe o tradutor
-        
-    Scenario: Acessar menu
-        When quando foco em 'todos os departamentos'
-        Then mostra todos os departamentos da loja
+        When clico no icone de cesta no header
+        And não adicionei no carrinho nenhum produto
+        Then lista os produtos adicionado no carrinho
+        And exibe a mensagem 'sua cesta está vazia'
 
     Scenario: Favoritar produto
         When clico em 'favoritar'
-        Then redireciona para a tela de login
+        Then preenche o icone de coração na cor vermelho
 
-    Scenario: Compartilhar produto
-        When clico em 'compartilhar'
-        And seleciono uma das redes de compartilhamento
-        Then abre uma nova janela para a rede social escolhida
+    Scenario: Avalizar produto
+        When clico em 'avaliar produto'
+        Then redireciona para a tela de 'avalie o produto'
+        When informo a estrela desejada
+        Then exibe dois campos para 'escreva sua avaliação'
+        When informo o titulo da avaliacao
+        And uma descrição da minha avaliacao
+        When clico em 'enviar avaliação' com no minimo 10 caracteres
+        Then exibe a mensagem 'sua avaliação foi enviada :)'
+        And aparece a opção 'ir para a página inicial'
 
-    Scenario: Visualizar forma de pagamento
-        When clico em 'mais forma de pagamento'
-        Then abre um pop-up com as opões e valores de pagamento
+    Scenario: Avaliar avaliações
+        When clico no icone de joia na secao de avaliações
+        Then preenche o icone joinha na cor vermelha e contabiliza em +1 avaliação
 
-    Scenario: Visualizar produto similar
-        When clico em 'outras ofertas deste mesmo produto'
-        Then redireciona para a tela de mais ofertas deste produto
+    Scenario: Perguntar uma duvida
+        When clico em 'escrever perguntar'
+        Then redireciona para a tela de 'tá com alguma dúvida sobre o produto?'
+        When informo a minha pergunta no campo 'Digite aqui a sua pergunta.' com até 150 caracteres
+        And seleciono 'aceito os termos e condições.'
+        And clico em 'enviar pergunta'
+        Then exibe a mensagem 'Agradecemos a sua pergunta!'
 
-    Scenario: Visualizar vendedor
-        When clico em 'Este produto é vendido por <vendedor>'
-        Then redireciona para a tela do vendedor
+    Scenario: Avaliar resposta
+        When clico no icone de joia na secao de duvidas
+        Then preenche o icone joinha na cor vermelha e contabiliza em +1 avaliação
 
-    Scenario: Informar CEP
-        When clico em 'informe seu CEP'
-        Then abre um pop-up para informar o CEP
-
-    Scenario: Informar CEP
-        And clico em 'Digite seu CEP'
-        And informo meu CEP
-        When clico em 'ok'
-        Then calcular o valor do frete e demonstra o mesmo e a previsão de entrega
+    Scenario: Denunciar produto
+        When clico em 'denunciar anúncio'
+        Then redireciona para a tela 'este espaço é exclusivo pra denunciar o anúncio.'
+        When categorizo a minha denuncia nas opcoes listadas
+        And informo mais detalhes no campo de descrição
+        When clico em 'denunciar'
+        Then exibe a mensagem 'Pronto, agora é só deixar com a gente!'
 
     Scenario: Comprar produto
         When clico em 'comprar'
         Then redireciona para a tela de garantia
-
-    Scenario: Visualizar politica de troca e devolucao
-        When clico em 'política de troca e devolução'
-        Then abre uma nova aba com a tela de trocas e devoluções
-
-    Scenario: Visualizar ranking de produtos
-        When visualizo a seção 'quem viu este produto viu também' e 'produtos mais vistos'
-        Then posso clicar em um produto e ir para o detalhe do mesmo
-
-    Scenario: Visualizar ranking de produto do departamento
-        When visualizo a seção 'os queridinhos da categoria'
-        Then posso clicar em um produto e ir para o detalhe do mesmo
-
-    Scenario: Visualizar avaliações do produto
-        When visualizo a seção 'avaliações'
-        Then posso ver as avaliações mais relevantes que outros clientes fizeram sobre o produto
-        When clico em 'ver mais comentários'
-        Then carrega mais itens na lista de avaliações
-    Scenario: Avalizar produto
-        When clico em 'avaliar produto'
-        Then redireciona para a tela de login
-
-    Scenario: Filtrar avaliações
-        When clico em '5 estrelas'
-        Then exibe a lista de avaliações que deram cinco entrelas
-
-    Scenario: Ordenar avaliações
-        When clico em 'ordenar'
-        Then exibe lista de <opcoes> de ordenações
-        
-        Examples:
-		| opcoes |
-		| "mais relevantes" |
-		| "mais recentes" |
-		| "mais antigas" |
-        | "mais positivas" |
-        | "mais negativas" |
-
-    Scenario: Avaliar avaliações
-        When clico no icone de joia na secao de avaliações
-        Then redireciona para a tela de login
-
-    Scenario: Visualizar duvidas do produto
-        When visualizo a seção 'dúvidas sobre o produto'
-        Then posso ver as duvidas mais uteis que foi respondida sobre o produto
-        When clico em 'ver mais perguntas'
-        Then carrega mais itens na lista de dúvidas
-
-    Scenario: Perguntar uma duvida
-        When clico em 'escrever perguntar'
-        Then redireciona para a tela de login
-
-    Scenario: Ordenar respostas
-        When clico em 'ordenar por respostas mais úteis'
-        Then exibe a lista de <opcoes> de ordenação
-
-        Examples:
-		| opcoes |
-		| "ordenar por respostas mais úteis" |
-		| "ordenar por mais recentes" |
-		| "ordenar por mais antigos" |
-
-    Scenario: Buscar pergunta
-        When clico no campo de busca de pergunta
-        And informo um texto com a duvida
-        When clico no icone de Buscar
-        Then lista resultado de perguntas que possui parte do texto que informei
-
-    Scenario: Avaliar resposta
-        When clico no icone de joia na secao de duvidas
-        Then redireciona para a tela de login
-
-    Scenario: Denunciar produto
-        When clico em 'denunciar anúncio'
-        Then redireciona para a tela de login
-
-    Scenario: Visualizar ficha tecnica
-        When clico em 'ficha técnica'
-        Then abre a lista com a especificação do produto
-
-    Scenario: Visualizar informações do produto
-        When clico em 'mais informações do produto'
-        Then direciona a tela para a secao informações do produto
+        When escolho a garantia desejada
+        And clico em 'ir para cesta'
+        Then redireciona para a tela 'minha cesta'
+        When clico em 'continuar'
+        Then redireciona para a tela 'pagamento'
+        When informo o endereço de entrega
+        And seleciono a opção de frete
+        When informo os dados de pagamento
+        And clico em 'fechar pedido'
+        Then redireciona para a tela 'obrigada' e exibe a mensagem 'pedido concluído :)'
