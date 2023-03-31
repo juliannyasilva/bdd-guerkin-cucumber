@@ -1,4 +1,4 @@
-Feature: login
+Feature: Cadastro
 
 	Como um cliente final
 	Desejo realizar o cadastro no site da Americanas.com.br
